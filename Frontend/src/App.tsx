@@ -1,17 +1,18 @@
-import { useState } from 'react'
-
-
-function App() {
-
-
+import SignUp from "./pages/SignUp";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import Login from "./pages/Longin";
+const App = function App() {
   return (
-    <>
-    <h1>
-    Hello world!
-  </h1>
-    </>
-    
+    <Router>
+ 
+<Routes>
+<Route path="/" element={<Login/>}/>
+<Route path="/signup" element={<SignUp/>}/>
+</Routes>
+
+    </Router>
+
   )
 }
 
-export default App
+export default App;
