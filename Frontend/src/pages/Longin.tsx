@@ -1,7 +1,29 @@
-
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
  function Login() {
+  // const {formData, setFormData} = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  const [formData, setFormData] = useState({ email: "", password: '' });
+  
+const [email, setEmail ] = useState("")
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+        alert('Login successful!');
+        console.log(response.data);
+    } catch (error) {
+        alert('Login failed');
+        console.error(error.response?.data?.message || error.message);
+    }
+};
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
@@ -14,6 +36,7 @@ import { Link } from "react-router-dom";
             <input
               type="email"
               id="email"
+              value={email}
               className="w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:outline-none focus:ring"
               placeholder="Enter your email"
               required
